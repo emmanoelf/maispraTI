@@ -1,4 +1,4 @@
-### List of exercises 01
+### List of exercises 02
 
 - Download the project;
 - Install node dependencies with `npm install`;
