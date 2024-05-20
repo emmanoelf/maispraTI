@@ -5,7 +5,9 @@ class Hotel{
         this.name = name;
         this.city = city;
         this.total_rooms = total_rooms;
-        this.available_rooms = this.total_rooms;
+        this.available_rooms = this.total_rooms - (this.booked_rooms + this.occupied_rooms);
+        this.booked_rooms = 0;
+        this.occupied_rooms = 0;
     }
 
     addHotel(hotel){
@@ -25,6 +27,17 @@ class Hotel{
 
     findAll(){
         return hotels;
+    }
+
+    checkIn(id){
+        const hotel = this.findById(id);
+        hotel.booked_rooms--;
+        hotel.occupied_rooms++;
+    }
+
+    checkOut(id){
+        const hotel = this.findById(id);
+        hotel.occupied_rooms--;
     }
 
 }
