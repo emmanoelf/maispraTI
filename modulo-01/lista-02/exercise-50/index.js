@@ -49,6 +49,24 @@ function main(){
                 console.log(BookingService.prototype.showAllBookings());
                 break;
             }
+            case 6: {
+                let name_client = prompt("Digite o nome do cliente para realizar o check-in: ");
+                HotelService.prototype.checkIn(name_client);
+                break;
+            }
+            case 7: {
+                let name_client = prompt("Digite o nome do cliente para realizar o check-out: ");
+                HotelService.prototype.checkOut(name_client);
+                break;
+            }
+            case 8:{
+                let name_client = prompt("Digite o nome do cliente para realizar realizar a avaliação do hotel: ");
+                let id_hotel = parseInt(prompt("Digite id do hotel: "));
+                let rate = parseFloat(prompt("Digite a nota do hotel: "));
+                let comment = prompt("Digite um comentário para o hotel: ");
+                HotelService.prototype.rateHotel(id_hotel, name_client, rate, comment);
+                break;
+            }
             default: {
                 console.log("Encerrando");
                 break;
