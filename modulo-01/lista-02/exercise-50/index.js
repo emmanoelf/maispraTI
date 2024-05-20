@@ -50,16 +50,21 @@ function main(){
                 break;
             }
             case 6: {
+                let id = parseInt(prompt("Digite o id do hotel verificar suas ocupações: "));
+                console.log(HotelService.prototype.showOccupations(id));
+                break;
+            }
+            case 7: {
                 let name_client = prompt("Digite o nome do cliente para realizar o check-in: ");
                 HotelService.prototype.checkIn(name_client);
                 break;
             }
-            case 7: {
+            case 8: {
                 let name_client = prompt("Digite o nome do cliente para realizar o check-out: ");
                 HotelService.prototype.checkOut(name_client);
                 break;
             }
-            case 8:{
+            case 9:{
                 let name_client = prompt("Digite o nome do cliente para realizar realizar a avaliação do hotel: ");
                 let id_hotel = parseInt(prompt("Digite id do hotel: "));
                 let rate = parseFloat(prompt("Digite a nota do hotel: "));

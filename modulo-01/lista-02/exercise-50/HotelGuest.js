@@ -22,6 +22,11 @@ class HotelGuest{
         return hotel_guest;
     }
 
+    findById(id_hotel){
+        const hotel_occupations = hotel_guests.filter((occupation) => occupation.id_hotel === id_hotel);
+        return hotel_occupations;
+    }
+
     findAll(){
         return hotel_guests;
     }

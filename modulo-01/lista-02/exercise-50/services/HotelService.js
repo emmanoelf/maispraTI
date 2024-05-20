@@ -82,7 +82,7 @@ class HotelService{
             throw new Error('Hotel não encontrado.');
         }
 
-        const guests = HotelGuest.prototype.findAll()
+        const guests = HotelGuest.prototype.findById(id);
         return guests;
     }
 
