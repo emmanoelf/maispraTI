@@ -15,7 +15,7 @@ class BookingService{
         }
 
         Booking.prototype.addBooking(booking);
-        hotel.available_rooms--;
+        hotel.booked_rooms++;
     }
 
     removeBooking(name_client){
@@ -26,7 +26,7 @@ class BookingService{
         }
 
         const hotel = Hotel.prototype.findById(remove.id_hotel);
-        hotel.available_rooms++;
+        hotel.booked_rooms++;
     }
 
     showAllBookings(){
