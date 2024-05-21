@@ -1,24 +1,25 @@
-const { exercise_26 } = require('./utils/matriz');
-const a = exercise_26;
-const b = a;
+const { exercise_26_a, exercise_26_b } = require('./utils/matriz');
+const generateRandomMatriz = require('./utils/generateMatriz');
+//const a = exercise_26_a;
+//const b = exercise_26_b;
+const a = generateRandomMatriz(3,5,10);
+const b = generateRandomMatriz(3,5,10);
 
-function multiplyMatriz(a, b){
-    const multiply = [];
+function multiplyMatrix(a, b) {
+    let product = [];
     for (let i = 0; i < a.length; i++) {
-        multiply[i] = [];
+        product[i] = [];
         for (let j = 0; j < b[0].length; j++) {
-            let sum = 0;
-            for (let k = 0; k < a[0].length; k++) {
-                sum += a[i][k] * b[k][j];
-            }
-            multiply[i][j] = sum;
+            product[i][j] = a[i][j] * b[i][j];
         }
     }
-    return multiply;
+    return product;
 }
 
 function main(){
-    console.log(multiplyMatriz(a,b));
+    console.log("Matriz a: ", a);
+    console.log("Matriz b: ", b);
+    console.log("Matriz multiplicada:", multiplyMatrix(a,b));
 }
 
 main();

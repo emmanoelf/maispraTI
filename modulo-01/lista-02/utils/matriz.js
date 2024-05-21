@@ -25,10 +25,18 @@ const exercise_24 = [
     [-5, -2, 3, 4, 5, -6, 7, -8],
 ];
 
-const exercise_26 = [
+const exercise_26_a = [
     [1,2,3,4,5],
     [6,7,8,9,10],
     [11,12,13,14,15],
+];
+
+const exercise_26_b = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [10,11,12],
+    [13,14,15]
 ];
 
 const exercise_27 = [
@@ -178,4 +186,4 @@ let exercise_34 = [
   [11, 22, 22,  4,  1,  4, 26, 13, 26, 12, 24,20, 30,  7, 16, 30,  5,  8, 10, 11, 17,  5,29, 20, 17, 26, 30,  8, 26, 27,  9, 28, 18,25, 20, 30, 12,  6, 24, 26,  9, 20, 14, 10,21,  6, 20, 17,  9, 18]
 ]  
 
-module.exports = {data, exercise_24, exercise_26, exercise_27, exercise_28, exercise_29, exercise_30, exercise_31, exercise_33, exercise_32, exercise_34};
+module.exports = {data, exercise_24, exercise_26_a, exercise_26_b, exercise_27, exercise_28, exercise_29, exercise_30, exercise_31, exercise_33, exercise_32, exercise_34};
