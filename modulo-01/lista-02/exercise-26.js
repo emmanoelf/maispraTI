@@ -1,4 +1,4 @@
-const { exercise_26 } = require('./matriz.js');
+const { exercise_26 } = require('./utils/matriz');
 const a = exercise_26;
 const b = a;
 

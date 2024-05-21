@@ -1,4 +1,4 @@
-const { exercise_27 } = require('./matriz.js');
+const { exercise_27 } = require('./utils/matriz');
 const matriz = exercise_27;
 
 function multiplyForParameter(matriz, multiplicator){

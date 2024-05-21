@@ -1,4 +1,4 @@
-const { exercise_24 } = require('./matriz.js');
+const { exercise_24 } = require('./utils/matriz');
 const matriz = exercise_24;
 
 function negativeRowCounter(matriz){

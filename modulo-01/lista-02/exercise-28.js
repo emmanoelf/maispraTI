@@ -1,4 +1,4 @@
-const { exercise_28 } = require('./matriz.js');
+const { exercise_28 } = require('./utils/matriz');
 const matriz = exercise_28;
 
 function sumElementsAboveMatrixDiagonal(matriz) {
