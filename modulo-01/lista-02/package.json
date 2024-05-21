@@ -1,0 +1,15 @@
+{
+  "name": "lista-02",
+  "version": "1.0.0",
+  "description": "- Download the project;\r - Install node dependencies with `npm install`;\r - Execute file with `node file name`",
+  "main": "exercise-01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
