@@ -27,6 +27,7 @@ import TodoApp from "./components/TodoApp";
 import QuizApp from "./components/QuizApp";
 import LanguageTranslator from "./components/LanguageTranslator";
 import Login from "./components/Login";
+import Footer from "./components/Footer";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { decodeFakeJwt } from "./utils/fakeJwt";
@@ -115,22 +116,6 @@ const StyledLink = styled(Link)`
   &:hover {
     background-color: #34495e;
     color: #ecf0f1;
-  }
-`;
-
-// Estiliza o rodapé do aplicativo.
-const Footer = styled.div`
-  width: 100%;
-  background-color: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: absolute;
-  bottom: 0;
-
-  @media (max-width: 768px) {
-    padding: 5px 0;
-    font-size: 12px;
   }
 `;
 
