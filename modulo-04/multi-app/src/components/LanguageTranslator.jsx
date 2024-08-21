@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import ErrorMessage from './ErrorMessage';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -98,18 +99,29 @@ const LanguageTranslator = () => {
   const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
   const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
   const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
+  const [error, setError] = useState('');
 
   // Função para traduzir o texto
   const translateText = async () => {
     try {
-      const response = await axios.get('https://api.mymemory.translated.net/get', {
-        params: {
-          q: text, // Texto a ser traduzido
-          langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
-        },
-      });
-      setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
+      setError("") // Reseta o erro antes de uma consulta
+      if(!text){
+        setError("O campo não pode estar em branco");
+      }else{
+        if(text.length > 500){ // Verifica se o tamannho do texto é maior de 500 caracteres (limite da API consultada)
+          setError('O texto não deve possuir mais de 500 caracteres');
+          return;
+        }
+        const response = await axios.get('https://api.mymemory.translated.net/get', {
+          params: {
+            q: text, // Texto a ser traduzido
+            langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
+          },
+        });
+        setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
+      }
     } catch (error) {
+      setError(error);
       console.error("Error translating text:", error); // Exibe um erro no console em caso de falha
     }
   };
@@ -145,6 +157,7 @@ const LanguageTranslator = () => {
         onChange={(e) => setText(e.target.value)} // Atualiza o estado text conforme o usuário digita
         placeholder="Enter text to translate" // Placeholder do campo de entrada
       />
+      {error && <ErrorMessage message={error}></ErrorMessage>}
       <Button onClick={translateText}>Translate</Button> {/* Botão que chama a função translateText quando clicado */}
       {translatedText && <TranslatedText>{translatedText}</TranslatedText>} {/* Condicional que exibe o texto traduzido se translatedText não for vazio */}
     </Container>
