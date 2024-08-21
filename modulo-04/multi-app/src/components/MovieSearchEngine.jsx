@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import ErrorMessage from './ErrorMessage';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -105,14 +106,23 @@ const MovieCard = styled.div`
 const MovieSearchEngine = () => {
   const [query, setQuery] = useState(''); // Define o estado para a consulta de busca
   const [movies, setMovies] = useState([]); // Define o estado para armazenar os filmes
+  const [error, setError] = useState(''); // Define o estado para verificar se contém erro
 
   // Função para buscar filmes
   const searchMovies = async () => {
+    setError(''); // Reseta a mensagem de erro antes de uma nova busca
     try {
       const response = await axios.get(`http://www.omdbapi.com/?s=${query}&apikey=403abbfe`); // Faz uma requisição GET para a API OMDB
       setMovies(response.data.Search); // Armazena os dados dos filmes no estado movies
+      if(response.data?.Error){ // Verifica se na resposta da requisição existe a propriedade Error
+        if(response.data.Error === "Incorrect IMDb ID."){ // Verifica se é este o erro que veio na requisição
+          setError("O campo não pode estar em branco");
+        }else{
+          setError("Filme não encontrado");
+        }
+      }
     } catch (error) {
-      console.error("Error fetching movie data:", error); // Exibe um erro no console em caso de falha
+      setError(error) // Define o estado com o erro atual
     }
   };
 
@@ -125,6 +135,7 @@ const MovieSearchEngine = () => {
         onChange={(e) => setQuery(e.target.value)} // Atualiza o estado query conforme o usuário digita
         placeholder="Search for a movie" // Placeholder do campo de entrada
       />
+      {error && <ErrorMessage message={error}></ErrorMessage>}
       <Button onClick={searchMovies}>Search</Button> {/* Botão que chama a função searchMovies quando clicado */}
       <MoviesContainer>
         {movies && movies.map((movie) => ( // Verifica se há filmes e os mapeia para exibir MovieCard
