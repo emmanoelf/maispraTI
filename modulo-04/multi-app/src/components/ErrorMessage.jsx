@@ -18,7 +18,7 @@ const ErrorMessage = ({message}) => {
 
 // Adiciona uma tipagem ao dado que será recebido
 ErrorMessage.propTypes = {
-    message: PropTypes.string.isRequired, // Define que o dado vai ser do tipo string e que será obrigatório
+    message: PropTypes.string.isRequired, // Define que a props "message" vai ser do tipo string e que será obrigatório
 };
 
 export default ErrorMessage;

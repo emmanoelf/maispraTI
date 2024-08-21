@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import ErrorMessage from './ErrorMessage';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -71,14 +72,23 @@ const ResultsContainer = styled.div`
 const IPAddressFinder = () => {
   const [ip, setIp] = useState(''); // Define o estado para o IP digitado pelo usuário
   const [ipData, setIpData] = useState(null); // Define o estado para armazenar os dados do IP
+  const [error, setError] = useState('');
 
   // Função para buscar os dados do IP
   const findIP = async () => {
+    setError('');
     try {
       const url = `https://ipinfo.io/${ip}/json`
       const response = await axios.get(url); // Faz uma requisição GET para a API ipinfo.io
+      console.log(response);
+      if(response.data.status === 404){
+        setError('Por favor, forneça um IP válido.');
+      }
       setIpData(response.data); // Armazena os dados da resposta no estado ipData
     } catch (error) {
+      if(error.code === "ERR_NETWORK"){
+        setError("Ocorreu um erro ao tentar realizar a busca. Caso utilize alguma extensão (ex ADBLOCK) por favor, desative e tente novamente");
+      }
       console.error("Error fetching IP address data:", error); // Exibe um erro no console em caso de falha
     }
   };
@@ -92,6 +102,7 @@ const IPAddressFinder = () => {
         onChange={(e) => setIp(e.target.value)} // Atualiza o estado ip conforme o usuário digita
         placeholder="Enter IP address" // Placeholder do campo de entrada
       />
+      {error && <ErrorMessage message={error}></ErrorMessage>}
       <Button onClick={findIP}>Find IP</Button> {/* Botão que chama a função findIP quando clicado */}
       {ipData && ( // Condicional que exibe os dados do IP se ipData não for null
         <ResultsContainer>
