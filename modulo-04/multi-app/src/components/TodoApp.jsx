@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 // Importa a biblioteca styled-components para criar componentes estilizados.
 import styled from 'styled-components';
+import ErrorMessage from './ErrorMessage';
 
 // Cria um componente estilizado chamado Container usando styled-components.
 // Esse componente estiliza uma <div> com flexbox para centralizar o conteúdo e adicionar padding, bordas e sombras.
@@ -130,6 +131,7 @@ const TodoApp = () => {
   const [tasks, setTasks] = useState([]); // Estado para a lista de tarefas.
   const [editingTaskId, setEditingTaskId] = useState(null); // Estado para o id da tarefa que está sendo editada.
   const [editingTaskText, setEditingTaskText] = useState(''); // Estado para o texto da tarefa que está sendo editada.
+  const [error, setError] = useState('');
 
   //Gera um id randômico combinando a data atual com math.random
   const generateId = () => {
@@ -152,7 +154,10 @@ const TodoApp = () => {
     if(task){
       const newTask = { id: generateId(), text: task }
       setTask("");
-      setTasks([...tasks, newTask]);
+      setTasks([...tasks, newTask]); 
+      setError("");
+    }else{
+      setError("O campo deve ser preenchido");
     }
   }
 
@@ -184,6 +189,7 @@ const TodoApp = () => {
         onChange={(e) => setTask(e.target.value)}
         placeholder="Add a new task"
       />
+      {error && <ErrorMessage message={error}></ErrorMessage>}
       <Button onClick={addTask}>Add Task</Button>
       <TaskList>
         {tasks.map((task) => (
