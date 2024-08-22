@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 import { createFakeJwt } from '../utils/fakeJwt';
+import { useNavigate } from 'react-router-dom';
 
 // Define o estilo do container principal do login
 const LoginContainer = styled.div`
@@ -48,19 +49,18 @@ const Button = styled.button`
 
 // Componente principal de Login
 // eslint-disable-next-line react/prop-types
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [username, setUsername] = useState(''); // Define o estado para o nome de usuário
   const [password, setPassword] = useState(''); // Define o estado para a senha
+  const navigate = useNavigate(); // Hook para navegação.
 
   // Função para lidar com o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault(); // Previne o comportamento padrão do formulário
     if (username === 'admin' && password === 'password') {
-      const token = createFakeJwt(username);
-
-      localStorage.setItem("token", token);
-
-      onLogin(); // Chama a função onLogin passada como prop se as credenciais estiverem corretas
+      const token = createFakeJwt(username); // Chama a função para criar o token
+      localStorage.setItem("token", token); // Armazena o token
+      navigate("/main"); // Redireciona para a tela principal pós login
     } else {
       alert('Invalid credentials'); // Exibe um alerta se as credenciais estiverem incorretas
     }
