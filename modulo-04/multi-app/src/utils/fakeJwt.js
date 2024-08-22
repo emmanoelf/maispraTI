@@ -12,12 +12,11 @@ export function decodeFakeJwt(token){
     try{
         const decoded = JSON.parse(atob(token));
         if(decoded.exp > Date.now() / 1000){
-            console.log("Passou na validacao")
             return decoded;
         }
         console.log("Expired token");
         throw new Error("Expired token");
     } catch(error){
-        console.log(error);
+        console.error(error);
     }
 }
