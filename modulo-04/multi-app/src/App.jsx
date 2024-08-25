@@ -5,7 +5,7 @@ import styled from "styled-components";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { decodeFakeJwt } from "./utils/fakeJwt";
-import Main from "./components/Main";
+import Main from "./components/shared/Main";
 import Login from "./components/Login";
 
 // Estiliza o contêiner principal do aplicativo.
@@ -29,9 +29,9 @@ const App = () => {
       navigate("/");
     }else{
       const decoded_token = decodeFakeJwt(token); // Decodifica o token
-      const isExpired = decoded_token.exp < (Date.now() / 1000); // Valida se o token ainda não expirou
-      if(isExpired){
-        navigate("/")
+      if(decoded_token === undefined){ // Se o decoded_token for undefined significa que ele já expirou
+        localStorage.removeItem("token"); // Remove o token do localStorage
+        navigate("/");
       }
     }
   }, [navigate]);
