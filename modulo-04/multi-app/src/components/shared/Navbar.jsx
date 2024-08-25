@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 
-const NavBarContainer = styled.div`
+const NavBarContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'isOpen'
+})`
   width: 240px;
   background-color: #2c3e50;
   color: white;
