@@ -75,6 +75,7 @@ const CarouselMultiApp = ({ carouselIndex, handleAccess }) => {
             autoPlay={true}
             interval={5000}
             selectedItem={carouselIndex}
+            showThumbs={false}
             onChange={(index) => handleAccess(index, null)}
             >
                 <CarouselItem>
@@ -123,7 +124,7 @@ const CarouselMultiApp = ({ carouselIndex, handleAccess }) => {
 
 CarouselMultiApp.propTypes = {
     handleAccess: PropTypes.func.isRequired,
-    carouselIndex: PropTypes.func.isRequired
+    carouselIndex: PropTypes.number.isRequired
 }
 
 export default CarouselMultiApp;
