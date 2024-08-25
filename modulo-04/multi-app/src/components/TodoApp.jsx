@@ -131,7 +131,8 @@ const TodoApp = () => {
   const [tasks, setTasks] = useState([]); // Estado para a lista de tarefas.
   const [editingTaskId, setEditingTaskId] = useState(null); // Estado para o id da tarefa que está sendo editada.
   const [editingTaskText, setEditingTaskText] = useState(''); // Estado para o texto da tarefa que está sendo editada.
-  const [error, setError] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true); // Estado para controlar a primeira renderização. Necessário para não apagar o conteúdo existente ao atualizar a página
+  const [error, setError] = useState(''); // Estado para controlar possíveis erros
 
   //Gera um id randômico combinando a data atual com math.random
   const generateId = () => {
@@ -142,12 +143,15 @@ const TodoApp = () => {
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     setTasks(savedTasks);
+    setIsInitialLoad(false); // Informamos que a primeira renderização foi concluída
   }, []);
 
   //Busca as tarefas armazenadas da API do localStorage e atualiza as mesmas quando necessário
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks)); //Necessária a conversão de String pois o localStorage só armazena este tipo de dado
-  }, [tasks]);
+    if(!isInitialLoad){ // Se não for a primeira renderização indica que o usuário deseja atualizar as tasks
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }, [tasks, isInitialLoad]);
 
   //Função para adicionar uma nova tarefa
   const addTask = async () =>{
