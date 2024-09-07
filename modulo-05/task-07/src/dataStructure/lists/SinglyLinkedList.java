@@ -39,7 +39,7 @@ public class SinglyLinkedList<E> {
     public void remove(int index){
         Node<E> current = this.head;
 
-        if(this.head == null){
+        if(index < 0 || this.head == null){
             throw new IndexOutOfBoundsException("Index fora dos limites/inválido.");
         }
 
@@ -49,19 +49,19 @@ public class SinglyLinkedList<E> {
         }
 
         int count = 0;
-        Node<E> previous = null;
 
-        while(current != null && count < index){
-            previous = current;
+        while(current != null && count < index - 1){
             current = current.getNext();
             count++;
         }
 
-        if(current.getNext() == null){
+        if(current.getNext() == null || count != index - 1){
             throw new IndexOutOfBoundsException("Index fora dos limites/inválido.");
         }
 
-        previous.next = current.getNext();
+        Node<E> removed = current.getNext();
+        current.next = removed.getNext();
+        removed.setNext(null);
     }
 
     public int size(){
