@@ -9,6 +9,7 @@ public class Main {
         SinglyLinkedList<Editor> editorVersion = new SinglyLinkedList<>();
         Scanner scanner = new Scanner(System.in);
         String option;
+        String recoveredText = "";
         try{
             while(true){
                 showMenu();
@@ -17,7 +18,14 @@ public class Main {
                     case "1":
                         System.out.println("Insira o texto que deseja armazenar: ");
                         String text = scanner.nextLine();
-                        editorVersion.add(new Editor(text));
+
+                        while(text == null || text.trim().isEmpty()){
+                            System.out.println("O campo não pode ser vazio! Por favor insira o texto que deseja armazenar");
+                            text = scanner.nextLine();
+                        }
+
+                        recoveredText = recoveredText.concat(text) + " ";
+                        editorVersion.add(new Editor(recoveredText));
                         break;
                     case "2":
                         if(editorVersion.isEmpty()){
@@ -47,7 +55,8 @@ public class Main {
                             System.out.println("Você não possui nenhum registro.");
                             break;
                         }
-                        editorVersion.showAllElements();
+                        Editor lastUpdate = editorVersion.get(editorVersion.size() - 1);
+                        System.out.println(lastUpdate.toString());
                         break;
                     case "0":
                         System.out.println("Encerrando...");
