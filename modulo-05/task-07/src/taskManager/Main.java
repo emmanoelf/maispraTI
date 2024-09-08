@@ -29,11 +29,10 @@ public class Main {
                     case "3":
                         System.out.println("Indique a POSIÇÃO da tarefa que deseja marcar como conluída: ");
                         position = Integer.parseInt(scanner.nextLine());
-                        int findTask = searchTask(tasks, position);
-                        if(findTask == -1){
-                            System.out.println("Posição não encontrada");
-                            break;
-                        }
+
+                        Task task = tasks.get(position);
+                        task.markAsCompleted();
+
                         System.out.println("A tarefa da posição " + position + " foi marcada como concluída!");
                         break;
                     case "4":
@@ -60,19 +59,5 @@ public class Main {
         System.out.println("3 - Marcar uma tarefa como concluída");
         System.out.println("4 - Exibir todas as tarefas");
         System.out.println("0 - Sair");
-    }
-
-    private static int searchTask(SinglyLinkedList<Task> tasks, int position){
-        Node<Task> current = tasks.head;
-        int count = 0;
-        while(current != null){
-            if(count == position){
-                current.getElement().markAsCompleted();
-                return count;
-            }
-            current = current.getNext();
-            count++;
-        }
-        return -1;
     }
 }
