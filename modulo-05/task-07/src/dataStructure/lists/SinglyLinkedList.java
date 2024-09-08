@@ -1,7 +1,7 @@
 package dataStructure.lists;
 
 public class SinglyLinkedList<E> {
-    public Node<E> head;
+    private Node<E> head;
 
     public SinglyLinkedList(){
         this.head = null;
