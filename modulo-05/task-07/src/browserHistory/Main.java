@@ -34,7 +34,7 @@ public class Main {
                     case "0":
                         System.out.println("Encerrando...");
                         scanner.close();
-                        break;
+                        return;
                     default:
                         System.out.println("Opção inválida. Por favor selecione novamente.");
                         break;
