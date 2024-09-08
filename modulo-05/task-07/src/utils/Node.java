@@ -1,4 +1,4 @@
-package dataStructure.lists;
+package utils;
 
 public class Node<E> {
     protected E element;

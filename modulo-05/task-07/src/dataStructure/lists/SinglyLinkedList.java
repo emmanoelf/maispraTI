@@ -1,5 +1,7 @@
 package dataStructure.lists;
 
+import utils.Node;
+
 public class SinglyLinkedList<E> {
     private Node<E> head;
 
@@ -17,7 +19,7 @@ public class SinglyLinkedList<E> {
             while(current.getNext() != null){
                 current = current.getNext();
             }
-            current.next = newNode;
+            current.setNext(newNode);
         }
     }
 
@@ -60,7 +62,7 @@ public class SinglyLinkedList<E> {
         }
 
         Node<E> removed = current.getNext();
-        current.next = removed.getNext();
+        current.setNext(removed.getNext());
         removed.setNext(null);
     }
 

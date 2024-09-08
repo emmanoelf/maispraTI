@@ -1,5 +1,7 @@
 package dataStructure.lists;
 
+import utils.DNode;
+
 public class DoublyLinkedList<E> {
     DNode<E> head;
     DNode<E> tail;

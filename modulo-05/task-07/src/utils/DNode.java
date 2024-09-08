@@ -1,4 +1,4 @@
-package dataStructure.lists;
+package utils;
 
 public class DNode<E> {
     protected E element;
