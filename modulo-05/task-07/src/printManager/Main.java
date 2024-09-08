@@ -40,6 +40,10 @@ public class Main {
                         System.out.println("Documento impresso.");
                         break;
                     case "3":
+                        if(documentsQueue.isEmpty()){
+                            System.out.println("A fila de impressão está vazia.");
+                            break;
+                        }
                         System.out.println("Fila em ordem de espera");
                         documentsQueue.showAllElements();
                         break;
@@ -49,6 +53,7 @@ public class Main {
                         return;
                     default:
                         System.out.println("Opção inválida");
+                        break;
                 }
             }
         } catch (Exception e) {
