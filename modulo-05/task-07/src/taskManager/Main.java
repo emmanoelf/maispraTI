@@ -1,6 +1,5 @@
 package taskManager;
 
-import dataStructure.lists.Node;
 import dataStructure.lists.SinglyLinkedList;
 
 import java.util.Scanner;
