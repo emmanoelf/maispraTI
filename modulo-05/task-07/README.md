@@ -5,7 +5,7 @@
      - It has Node and DNode class for usage in `SinglyLinkedLists` and `DoublyLinkedLists`
   - `dataStructure`:
      - It has two packages separeted by two differents data structure aborded in this exercises all with `generics` concepts
-         - Lists witch contains `SinglyLinkedList` and `DoublyLinkedList` and queue;
+         - Lists witch contains `SinglyLinkedList` and `DoublyLinkedList`;
          - Queue that implements `SimpleQueue`;
 
 
