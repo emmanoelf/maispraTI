@@ -11,11 +11,11 @@ public abstract class Funcionario {
         this.tipoFuncionario = tipoFuncionario;
     }
 
-    public void promover(TipoFuncionario tipoFuncionario) {
-        this.tipoFuncionario = tipoFuncionario;
-        System.out.println("Funcionário(a) " + this.nome + " foi promovido(a).");
-    }
-
     public abstract double calcularSalario();
     public abstract double calcularBonus();
+
+    @Override
+    public String toString() {
+        return "Funcionário: " + nome + ", Salário: " + calcularSalario() + ", Bônus: " + calcularBonus();
+    }
 }
