@@ -67,6 +67,10 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User findByUsername(String username){
+        return userRepository.findByUsername(username);
+    }
+
     private UserDTO convertToDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
