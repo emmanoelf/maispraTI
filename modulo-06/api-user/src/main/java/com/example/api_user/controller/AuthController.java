@@ -1,40 +1,38 @@
 package com.example.api_user.controller;
 
 import com.example.api_user.dto.LoginDTO;
-import com.example.api_user.security.JwtTokenProvider;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import com.example.api_user.service.AuthService;
+import io.jsonwebtoken.io.IOException;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserDetailsService userDetailsService;
+    private final AuthService authService;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.userDetailsService = userDetailsService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
-            );
-            UserDetails user = (UserDetails) authentication.getPrincipal();
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+        String login = this.authService.login(loginDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(login);
+    }
 
-            return jwtTokenProvider.generateToken(user);
+    @GetMapping("/oauth2/authorize")
+    public RedirectView redirectToGithub() {
+        String oauthUrl = this.authService.redirectToGithub();
+        return new RedirectView(oauthUrl);
+    }
 
-        } catch (AuthenticationException error) {
-            throw new RuntimeException("Invalid Credentials");
-        }
+    @GetMapping("/oauth2/callback")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> handleGithubCallback(@RequestParam String code) throws IOException {
+        String token = this.authService.handleGithubCallback(code);
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
 }
